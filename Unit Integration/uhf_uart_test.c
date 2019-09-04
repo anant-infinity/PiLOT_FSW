@@ -22,7 +22,8 @@ int main() {
 
 
 	//Initializing the UHF UART
-	UART_init(&uhf_test_uart, COREUART3_BASE_ADDR,COREUART3_BAUD_VALUE, (DATA_8_BITS | NO_PARITY)); //Confirm Baud Rate
+	//Change the baud rate according to the Baud Rate of the PiLOT UHF module
+	UART_init(&uhf_test_uart, COREUART3_BASE_ADDR,COREUART3_BAUD_VALUE, (DATA_8_BITS | NO_PARITY)); 
 
 
 	//All read commands without CRC
