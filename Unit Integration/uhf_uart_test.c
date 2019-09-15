@@ -1,10 +1,8 @@
-UART_instance_t uhf_test_uart;
 #define MAX_RX_DATA_SIZE 512
-
 //change this according to the PiLOT FGPA prject 
-#define COREUART3_BASE_ADDR 	0x5000D000u
-#define COREUART3_BAUD_VALUE 	BAUD_VALUE_115200
-
+//#define COREUART3_BASE_ADDR 	0x5000D000u
+//#define COREUART3_BAUD_VALUE 	BAUD_VALUE_115200
+//UART_instance_t uhf_test_uart;
 uint8_t rx_data[MAX_RX_DATA_SIZE];
 size_t rx_size = 0;
 
@@ -24,7 +22,8 @@ int main() {
 	//Initializing the UHF UART
 	//Change the baud rate according to the Baud Rate of the PiLOT UHF module
 	UART_init(&uhf_test_uart, COREUART3_BASE_ADDR,COREUART3_BAUD_VALUE, (DATA_8_BITS | NO_PARITY)); 
-
+	//MSS_UART - if needed
+	//MSS_UART_init( &g_mss_uart0,MSS_UART_57600_BAUD, MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY |MSS_UART_ONE_STOP_BIT );
 
 	//All read commands without CRC
 	//Command to read Status Control Word
@@ -55,5 +54,5 @@ int main() {
 		}
 
 		//Reading data from the Receive Buffer
-		rx_size = UART_get_rx( &uhf_test_uart, rx_data, sizeof(rx_data));
+		rx_size = UART_get_rx( &g_mss_uart0, rx_data, sizeof(rx_data));
 	}
