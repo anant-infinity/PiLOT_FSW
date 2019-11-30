@@ -110,7 +110,9 @@ int main() {
 					uint16_t yvalue = 0x0000;
 					uint16_t zvalue = 0x0000;
 
-					// Concatenate Lower and Higher Bytes
+					// Concatenate Lower and Higher Bytes 
+					// Order of bytes changed because this is little to big endian converssion
+
 					xvalue = rx_buffer_xL[0];  // Insert the High byte into the lower byte of tvalue
 					xvalue <<= 8;  // Left shift the lower byte into the higher byte of tvalue
 					xvalue += rx_buffer_xH[0]; // Insert the Low byte into the lower byte of tvalue
