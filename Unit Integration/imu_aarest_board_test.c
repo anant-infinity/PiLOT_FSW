@@ -110,9 +110,8 @@ int main() {
 					uint16_t yvalue = 0x0000;
 					uint16_t zvalue = 0x0000;
 
-					// Concatenate Lower and Higher Bytes 
+					// Concatenate Lower and Higher Bytes
 					// Order of bytes changed because this is little to big endian converssion
-
 					xvalue = rx_buffer_xL[0];  // Insert the High byte into the lower byte of tvalue
 					xvalue <<= 8;  // Left shift the lower byte into the higher byte of tvalue
 					xvalue += rx_buffer_xH[0]; // Insert the Low byte into the lower byte of tvalue
@@ -128,9 +127,26 @@ int main() {
 					zvalue += rx_buffer_zH[0]; // Insert the Low byte into the lower byte of tvalue
 
 
+					// header for plotting
+					//uint8_t log_start_command[] = {'{','T','I','M','E','P','L','O','T','|','D','A','T','A','|','M','A','G','X','|','T','|'};
+					//uint8_t log_end_command[] = {'}'};
+					//UART_send(&logging_uart,(const uint16_t *)&log_start_command,sizeof(log_start_command));
 					UART_send(&logging_uart,(const uint16_t *)&xvalue,sizeof(xvalue));
 					UART_send(&logging_uart,(const uint16_t *)&yvalue,sizeof(yvalue));
 					UART_send(&logging_uart,(const uint16_t *)&zvalue,sizeof(zvalue));
+					//UART_send(&logging_uart,(const uint16_t *)&log_end_command,sizeof(log_end_command));
+
+					//Adding a delay Loop
+					uint16_t i = 0x0000;
+					uint8_t j = 0x00;
+
+					while(i<0xFFFF){
+							i=i+0x000F;
+							j = 0x00;
+							while(j<0xFF){
+								j=j+0x01;
+							}
+						}
 
 
 
